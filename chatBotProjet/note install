@@ -1,4 +1,4 @@
 requiered install
 
-npm i express ejs
+npm i express ejs mongoose jsonwebtoken
 npm i --save-dev nodemon

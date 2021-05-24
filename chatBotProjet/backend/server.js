@@ -11,6 +11,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded())
 app.use(cookieParser())
+
+//
+var path = require('path');
+app.use(express.static(path.join(__dirname, '../public')));
+//
+
 app.set('view engine', 'ejs');
 
 const uri = process.env.ATLAS_URI;

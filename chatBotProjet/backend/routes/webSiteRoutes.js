@@ -32,6 +32,12 @@ router.get('/disconnect', function(req, res) {
     }
 });
 
+// FAQ
+router.get('/faq', function(req, res) {
+  if (req.cookies['dataUser']=== undefined) res.redirect('/')
+  else res.render('../../views/pages/faq.ejs');
+});
+
 // ===========================================================================================
 
 
