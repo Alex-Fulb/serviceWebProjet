@@ -73,28 +73,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-// CONCERNANT LE BOT ICI 
 
-// router.post('/bot', async (req, res) => {
-//     try {
-//         console.log(req.body.directoryName)
-//         exec('cp -R ../botLambda ../bots/'+req.body.directoryName+ '; node
-//         ../bots/'+req.body.directoryName+'/template.js', (error, stdout,
-//         stderr) => {
-//             if (error) {
-//               console.error(`exec error: ${error}`);
-//               return;
-//             }
-//             console.log(`stdout: ${stdout}`);
-//             console.error(`stderr: ${stderr}`);
-//           });
-//         //res.send(req.body.directoryName)
-
-//     } catch (error) {
-//         console.error(error)
-//         res.send(false)
-//     }
-// });
 
 
 module.exports = router;
