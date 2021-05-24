@@ -12,19 +12,32 @@
     // gestion d'évènement de la page index.ejs 
     
     $(document).ready(function(){
-        // Boutton créer un bot 
+
+        // ================= CREATION D'UN BOT =====================
         $("#create").on('click',function(){
-    
-            console.log("text ->",$("#nomBot").val());
             $.ajax({
                 url: '/home/createBot',
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify({nom : $("#nomBot").val()}),
                 success: function(response){ 
-                    
-                    // On ajoute le bot dans le tableau
-                    $('#table').append($('<tr><td>'+response+'</td> <td><button>Démarrer</button></td> <td><button>Supprimer</button></td> <td><button>Modifier</button></td></tr>'));
+                    console.log(`response ! `, response  )
+                    $('#table').append($('<tr id='+response.id_Bot+'><td>'+response.name+'</td> <td><button>Démarrer</button></td> <td><button name="supp" id='+response.id_Bot+'>Supprimer</button></td> <td><button>Modifier</button></td></tr>'));
+                }
+            } );
+        });
+
+
+        // ================= SUPRESSION D'UN BOT =====================
+        $(document).on('click',"button[name = 'supp']",function(){
+           const idBot = $(this).attr('id')
+           $.ajax({
+                url: '/home/deleteBot',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({idBot : idBot}),
+                success: function(response){ 
+                    $('#'+response.idBot).remove();
                 }
             } );
         });

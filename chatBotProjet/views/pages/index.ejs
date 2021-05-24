@@ -18,10 +18,22 @@
     <br>
     <br>
     <h3 style="font: size 10;">Mes bots</h3>
+    
     <table id="table" style="margin-top:25px">
       <tr>
         <th>Prenom</th>
       </tr>
+      <% if(locals.bots) { %>
+      
+        <%for (var i = 0; i < bots.length; i++) {%>
+          <tr id= <%=bots[i].id_Bot %>>
+            <td id= <%=bots[i].id_Bot %>> <%=bots[i].name%></td> 
+            <td><button id= <%=bots[i].id_Bot %> >Démarrer</button></td> 
+            <td><button name="supp" id= <%=bots[i].id_Bot %> >Supprimer</button></td> 
+            <td><button id= <%=bots[i].id_Bot %> >Modifier</button></td>
+          </tr>
+        <%}%> 
+    <%}%>
     </table>
     
     </body>

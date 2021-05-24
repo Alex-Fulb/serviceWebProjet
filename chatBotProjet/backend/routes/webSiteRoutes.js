@@ -1,25 +1,35 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 let Bot = require('../model/botModel')
 let User = require('../model/userModel');
-const jwt = require('jsonwebtoken')
 
-// --------- GET -----------
+
+
+// ==================================== GET ============================================
 
 // Home page
-router.get('/', function(req, res) {
-
-  console.log(`Le cookie`, req.cookies['dataUser'])
-  if (req.cookies['dataUser'] === undefined)
-  res.redirect('/')
-  else res.render(
-      '../../views/pages/index.ejs', {name: req.cookies['dataUser']});
+router.get('/', async function(req, res) {
+  console.log(`Données de l'utilisateur`, req.cookies['dataUser'])
+  if (req.cookies['dataUser'] === undefined) {
+    res.redirect('/')
+  }
+  else {
+    const newUser = await User.findOne({email: req.cookies['dataUser'].email});
+    const dataBots = newUser.bots
+    var listsBots = [];
+    for (var i = 0; i < dataBots.length; i++) {
+      listsBots[i] = dataBots[i]
+    }
+    res.render('../../views/pages/index.ejs', {bots: listsBots});
+  }
 });
 
-// Page About
+// Page About -> Pas utile pour le moment ..
 router.get('/about', function(req, res) {
-  if (req.cookies['dataUser']=== undefined) res.redirect('/')
-  else res.render('../../views/pages/about.ejs');
+  if (req.cookies['dataUser'] === undefined)
+    res.redirect('/')
+    else res.render('../../views/pages/about.ejs');
 });
 
 // Deconnexion
@@ -41,34 +51,62 @@ router.get('/faq', function(req, res) {
 // ===========================================================================================
 
 
-
-
-// ------- POST --------
+// ==================================== POST ============================================
 
 
 // CREATION DU BOT
 router.post('/createBot', async function(req, res) {
-  
-   // Creation du bot dans mongoDB
   Bot.create(
-      {name: req.body.nom, port: 3000, owner: req.cookies['dataUser'].id},
-      function(err, doc) {
-        const idBot = doc._id;
+      {name: req.body.nom, owner: req.cookies['dataUser'].id},
 
+      async function(err, doc) {
+
+        const idBot = doc._id;
         const filter = {_id: req.cookies['dataUser'].id};
-        const update = {$push: {bots: idBot}}
-        
-        // JE METS A JOURS DIRECTEMENT LES BOTS DE LUTILISATEUR (j'insère un nouveau bot dans sa collection de bot , cf userModel.js)
-        User.findOneAndUpdate(filter, update, {new: true}, (err, doc) => {
-              console.log(`---> DOC`, doc)
-              if (err) {
-                console.log('Something wrong when updating data!');
-              }
-              console.log(doc);
+        const update = {$push: {bots: {id_Bot: idBot, name: req.body.nom}}};
+
+        User.findOneAndUpdate(filter, update, {new: true}, async (err, doc) => {
+          const newUser =
+              await User.findOne({email: req.cookies['dataUser'].email});
+          const dataBots = newUser.bots;
+          for (var i = 0; i < dataBots.length; i++) {
+            if (i === dataBots.length - 1) {
+              bot = dataBots[i];
+            }
+          }
+          res.send(bot)
+          if (err) {
+            console.log('Something wrong when updating data!');
+          }
+
         });
       })
+});
 
-  res.send(req.body.nom);
+
+// SUPRESSION D'UN BOT
+router.post('/deleteBot', async function(req, res) {
+
+  const idBotToDelete = req.body.idBot
+  const filter = {_id: req.cookies['dataUser'].id};
+  const update = {
+    $pull: {bots: {id_Bot: mongoose.Types.ObjectId(idBotToDelete)}}
+  };
+
+  User.updateOne(filter, update, (err, user) => {
+    console.log(`user après update`, user)
+    if (err) {
+      console.log(`err`, err)
+    }
+  })
+
+  Bot.findByIdAndRemove({_id: idBotToDelete}, async (err, doc) => {
+    const botSupp = {idBot: doc._id, name: doc.name};
+    res.send(botSupp);
+    if (err) {
+      console.log('Something wrong when updating data!');
+    }
+  })
 });
 
 
