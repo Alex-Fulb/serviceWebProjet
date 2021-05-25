@@ -6,7 +6,7 @@ const input_box = document.querySelector('input');
 
 const brains =
   [
-    "/brains/brain.rive"
+    "/brains/faqbrain.rive"
   ];
 
 bot.loadFile(brains).then(botReady).catch(botNotReady);

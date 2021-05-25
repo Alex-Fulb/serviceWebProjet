@@ -2,20 +2,20 @@
 <html>
 
 <head>
-  <%- include('../partials/head'); %>
   <link rel="stylesheet" type="text/css" href="/css/botstyle.css" />
+  <%- include('../partials/head'); %>
 </head>
 
 <header>
   <%- include('../partials/header'); %>
 </header>
 
-<body>
-  <div class="chat">
+<body class="container">
+  <div class="container" style="overflow:scroll; position:fixed; height: 90%;">
     <div class="messages"></div>
     <div id="edge"></div>
     <form class="actions">
-      <input type="text" placeholder="press 'Enter' to send...">
+      <input type="text" placeholder="Écrivez ici et appuyer sur Entrée pour envoyer">
     </form>
   </div>
 
@@ -24,7 +24,7 @@
   </footer>
 
   <script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
-  <script src="/js/botscript.js"></script>
+  <script src="/js/faqbotscript.js"></script>
 </body>
 
 </html>

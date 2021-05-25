@@ -1,0 +1,29 @@
+! version = 2.0
+
++ hello
+- hello, what is your name?
+
++ hi
+- hi, what is your name?
+
++ my name is *
+- nice to meet you <star>
+- nice meeting you <star>
+
++ thank you
+- you are welcome
+- welcome
+- no problem
+- no worries
+
++ who made this app
+- the designer of this app are Alex Fulbert and Marc Vacquant
+
++ tell me more about you
+- https://github.com/Alex-Fulb/serviceWebProjet
+
++ *
+- Sorry did not get what you said, if i can not answer you please do contact the support team
+- I am afraid that i can not understand you, if i can not answer you please do contact the support team
+- I did not get it, if i can not answer you please do contact the support team
+- Sorry can you please elaborate that for me, if i can not answer you please do contact the support team
