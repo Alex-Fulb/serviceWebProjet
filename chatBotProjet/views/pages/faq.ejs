@@ -1,30 +1,73 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="/css/botstyle.css" />
-  <%- include('../partials/head'); %>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/botstyle.css" />
+    <%- include('../partials/head'); %>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <header>
   <%- include('../partials/header'); %>
 </header>
-
-<body class="container">
-  <div class="container" style="overflow:scroll; position:fixed; height: 90%;">
-    <div class="messages"></div>
-    <div id="edge"></div>
-    <form class="actions">
-      <input type="text" placeholder="Écrivez ici et appuyer sur Entrée pour envoyer">
-    </form>
+<!--
+<body>
+  <div class="container">
+    <div class="container" style="overflow:scroll; position:fixed; height: 90%;">
+      <div class="messages"></div>
+      <div id="edge"></div>
+      <div class="panel-footer">
+        <div class="input-group">
+      <form>
+        <input type="text" class="form-control input-sm" placeholder="Écrivez ici et appuyer sur Entrée pour envoyer">
+        <input type="submit" class="btn btn-warning btn-sm" style="float: right;"/>
+      </form>
+      </div>
+      </div>
+    </div>
   </div>
+-->
+<div class="container">
+  <div class="row">
+      <div class="col-md-5">
+          <div class="panel panel-primary">
+              <div class="panel-heading" id="accordion">
+                  <span class="glyphicon glyphicon-comment"></span> Chat
+                  <div class="btn-group pull-right">
+                      <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion"
+                          href="#collapseOne">
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                      </a>
+                  </div>
+              </div>
+              <div class="panel-collapse collapse" id="collapseOne">
+                  <div class="panel-body">
+                      <ul class="messages">
+                      </ul>
+                  </div>
+                  <div class="panel-footer">
+                      <div class="input-group">
+      <form>
+        <input type="text" class="form-control input-sm" placeholder="Écrivez ici et appuyer sur Entrée pour envoyer">
+        <input type="submit" class="btn btn-warning btn-sm" style="float: right;"/>
+      </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
+<script src="/js/faqbotscript.js"></script>
 
-  <footer>
-    <%- include('../partials/footer'); %>
-  </footer>
-
-  <script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
-  <script src="/js/faqbotscript.js"></script>
 </body>
+
+<footer>
+<%- include('../partials/footer'); %>
+</footer>
+
+
 
 </html>
