@@ -1,43 +1,71 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <%- include('../partials/head'); %>
-</head>
-<body class="container">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
 
-<header>
-  <%- include('../partials/header'); %>
-</header>
+  <header>
+    <%- include('../partials/header'); %>
+  </header>
 
-<main>
-  <body>
-    <br>
+  <main>
+    <body>
+      <br>
+      <h3>Créer un bot</h3>
+      <input type="text" id="nomBot" placeholder="Steeve.."><button id="create">creer</button>
+      <br>
+      <br>
 
-    <h3>Créer un bot</h3>
-    <input type="text" id="nomBot" placeholder="Steeve.."><button id="create">creer</button>
-    <br>
-    <br>
-    <h3 style="font: size 10;">Mes bots</h3>
-    
-    <table id="table" style="margin-top:25px">
-      <tr>
-        <th>Prenom</th>
-      </tr>
-      <% if(locals.bots) { %>
-      
-        <%for (var i = 0; i < bots.length; i++) {%>
-          <tr id= <%=bots[i].id_Bot %>>
-            <td id= <%=bots[i].id_Bot %> name= <%=bots[i].name%>> <%=bots[i].name%></td> 
-            <td><button class=<%=bots[i].name%> name ="demarrer" id= <%=bots[i].id_Bot %> >Démarrer</button></td> 
-            <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i].id_Bot %> >Supprimer</button></td> 
-            <td><button class=<%=bots[i].name%> name = "modifier" id= <%=bots[i].id_Bot %> >Modifier</button></td>
-          </tr>
-        <%}%> 
-    <%}%>
-    </table>
-    
+      <div>
+
+        <div style="display: inline-block">
+          <h3 style="font: size 10;">Mes bots</h3>
+          
+          <table id="table">
+            <tr>
+              <th>Prenom</th>
+            </tr>
+            <% if(locals.bots) { %>
+            
+              <%for (var i = 0; i < bots.length; i++) {%>
+                <tr id= <%=bots[i].id_Bot %>>
+                  <td id= <%=bots[i].id_Bot %> name= <%=bots[i].name%>> <%=bots[i].name%></td> 
+                  <td><button class=<%=bots[i].name%> name ="demarrer" id= <%=bots[i].id_Bot %> >Démarrer</button></td> 
+                  <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i].id_Bot %> >Supprimer</button></td> 
+                  <td><button class=<%=bots[i].name%> name = "modifier" id= <%=bots[i].id_Bot %> >Modifier</button></td>
+                </tr>
+              <%}%> 
+          <%}%>
+          </table> 
+        </div>
+
+
+        <div style="display: inline-block ; margin-right: 50px">
+          <h3 style="font: size 10;">Cerveaux</h3>
+          <table id="table" style="margin-left:15px">
+            <tr>
+              <th>fichier</th>
+            </tr>
+                <tr>
+                  <td >Simple Brain</button></td> 
+                  <td><button>Charger</button></td> 
+                </tr>
+                <tr>
+                  <td >Crazy Brain</button></td> 
+                  <td><button>Charger</button></td> 
+                </tr>
+                <tr>
+                  <td >Relax Brain</button></td> 
+                  <td><button>Charger</button></td> 
+                </tr>
+          </table> 
+        </div>
+
+      </div>
+
+
     </body>
-    </html>
 </main>
 
 <footer>

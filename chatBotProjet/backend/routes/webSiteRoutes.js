@@ -1,20 +1,14 @@
 const express = require('express');
 const router = express.Router();
-// const exec = require('child_process').exec
 const fs = require('fs');
-const {spawn, fork} = require('child_process');
-const out = fs.openSync('./out.log', 'a');
-const err = fs.openSync('./out.log', 'a');
-
-
+const {spawn} = require('child_process');
 const mongoose = require('mongoose');
 let Bot = require('../model/botModel')
 let User = require('../model/userModel');
 
 
 
-// ==================================== GET
-// ============================================
+// ==================================== GET ============================================
 
 // Home page
 router.get('/', async function(req, res) {
@@ -57,11 +51,8 @@ router.get('/faq', function(req, res) {
     else res.render('../../views/pages/faq.ejs');
 });
 
-// ===========================================================================================
 
-
-// ==================================== POST
-// ============================================
+// ==================================== POST ============================================
 
 
 // CREATION DU BOT
@@ -120,7 +111,7 @@ router.post('/deleteBot', async function(req, res) {
 
 // DEMARRER LE BOT
 router.post('/bot', async (req, res) => {
-  
+
   const {idBot, nameBot} = req.body;
   const bot = await Bot.findOne({_id: idBot}, async (err, doc) => {
     const portBot = doc.port;
