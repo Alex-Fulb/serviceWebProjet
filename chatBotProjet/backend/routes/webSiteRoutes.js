@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-//const exec = require('child_process').exec
+// const exec = require('child_process').exec
 const fs = require('fs');
-const { spawn } = require('child_process');
+const {spawn, fork} = require('child_process');
 const out = fs.openSync('./out.log', 'a');
 const err = fs.openSync('./out.log', 'a');
 
@@ -118,63 +118,32 @@ router.post('/deleteBot', async function(req, res) {
 
 
 
-// // DEMARRER LE BOT
-// router.post('/bot', async (req, res) => {
+// DEMARRER LE BOT
+router.post('/bot', async (req, res) => {
   
-//   const {idBot, nameBot} = req.body;
-//   console.log(`idBot`, idBot);
-//   console.log(`nameBot`, nameBot)
+  const {idBot, nameBot} = req.body;
+  const bot = await Bot.findOne({_id: idBot}, async (err, doc) => {
+    const portBot = doc.port;
+    const child = spawn(
+        'cp',
+        [
+          '-R', '../templateBot', '../bots/' + nameBot, ';', 'node',
+          '../bots/' + nameBot + '/template.js',portBot
+        ],
 
-//   // Créer un dossier à son nom qui sera déposer dans le dossier bots à la racine du projet à son nom 
-//   // Et récupérer le numéro de port du bot en question le
-//   const bot = await Bot.findOne({_id: idBot}, async (err, doc) => {
-//     console.log(`----- DOC ------`, doc)
-//     const portBot = doc.port;
-//     console.log(`portBot`, portBot)
-//     // exec(
-//     //   'cp -R ../templateBot ../bots/'+nameBot+'; node ../bots/'+nameBot+'/template.js'+' '+portBot,
-//     //   (error, stdout, stderr) => {
-//     //     if (error) {
-//     //       console.error(`exec error: ${error}`);
-//     //       return;
-//     //     }
-//     //     console.log(`stdout: ${stdout}`);
-//     //     console.error(`stderr: ${stderr}`);
-//     //   });
+        {
+          shell: true,
+          detached: true,
+        });
 
-   
-//     const child = spawn('cp', ['-R', '../templateBot', '../bots/'+nameBot,";","node",'../bots/'+nameBot+'/template.js',portBot],
-  
-//     {
-//       shell : true,
-//       detached : true
+    child.stdout.on('data', (data) => {console.log(`stdout: ${data}`)})
 
-//     });
+    child.stderr.on('data', (data) => {console.log(`stderr: ${data}`)})
 
-//     child.stdout.on('data',(data) => {
-//       console.log(`stdout: ${data}`)
-//     })
+    child.unref();
 
-//     child.stderr.on('data',(data) => {
-//       console.log(`stderr: ${data}`)
-//     })
-
-//     child.unref();
-
-
-
-//     //subprocess.unref();
-//     //'cp -R ../templateBot ../bots/'+nameBot+'; node ../bots/'+nameBot+'/template.js'+' '+portBot
-//   });
-
-//   // try {
-//   // res.send(req.body.directoryName)
-
-//   // } catch (error) {
-//   //     console.error(error)
-//   //     res.send(false)
-//   // }
-// });
+  });
+});
 
 
 
