@@ -2,14 +2,36 @@ let bot = new RiveScript();
 
 const message_container = document.querySelector('.messages');
 const form = document.querySelector('form');
-const input_box = document.querySelector('input');
+const input_box = document.getElementById("inputChat");
 
-const brains =
-  [
-    "/brains/faqbrain.rive"
-  ];
+var langdiv = document.getElementById("langdiv").value;
+var lang = "eng";
 
-bot.loadFile(brains).then(botReady).catch(botNotReady);
+window.onload = function () {
+  bot.loadFile("/brains/faqbrain_eng.rive").then(botReady).catch(botNotReady);
+}
+
+function loadBrains() {
+  alert("Hello! test.rive loaded");
+  bot.loadFile("/brains/test.rive").then(botReady).catch(botNotReady);
+}
+
+function changeBrain() {
+  lang = document.querySelector('input[name="lang"]:checked').value;
+  bot = new RiveScript;
+  switch (lang) {
+
+    case "eng":
+      bot.loadFile("/brains/faqbrain_eng.rive").then(botReady).catch(botNotReady);
+      break;
+    case "fr":
+      bot.loadFile("/brains/faqbrain_fr.rive").then(botReady).catch(botNotReady);
+      break;
+    case "spa":
+      bot.loadFile("/brains/faqbrain_spa.rive").then(botReady).catch(botNotReady);
+      break;
+  }
+}
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -32,8 +54,24 @@ function selfReply(message) {
 }
 
 function botReady() {
+
   bot.sortReplies();
-  botReply('Hello');
+
+  switch (lang) {
+
+    case "eng":
+      botReply('Hello');
+      break;
+    case "fr":
+      botReply('Bonjour');
+      break;
+    case "spa":
+      botReply('Hola');
+      break;
+    default:
+      botReply("An error has occurred. Please refresh the page. If the error persist contact an administrator.")
+      break;
+  }
 }
 
 function botNotReady(err) {
