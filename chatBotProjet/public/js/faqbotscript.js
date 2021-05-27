@@ -11,9 +11,8 @@ window.onload = function () {
   bot.loadFile("/brains/faqbrain_eng.rive").then(botReady).catch(botNotReady);
 }
 
-function loadBrains() {
-  alert("Hello! test.rive loaded");
-  bot.loadFile("/brains/test.rive").then(botReady).catch(botNotReady);
+function loadBrains(pathToRive) {
+  bot.loadFile(pathToRive).then(botReady).catch(botNotReady);
 }
 
 function changeBrain() {

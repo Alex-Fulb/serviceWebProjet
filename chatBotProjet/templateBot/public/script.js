@@ -1,14 +1,15 @@
 let bot = new RiveScript();
 
-const brains = [
-    './brain.rive'
-    // './another-category-sample.rive
-];
+const brains =
+    [
+        './brain.rive'
+    ];
 bot.loadFile(brains).then(botReady).catch(botNotReady);
 
 const message_container = document.querySelector('.messages');
 const form = document.querySelector('form');
 const input_box = document.querySelector('input');
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     selfReply(input_box.value);
@@ -24,9 +25,13 @@ function selfReply(message) {
     message_container.innerHTML += `<div class=self>${message}</div>`;
     location.href = '#edge';
 
-    bot.reply("local - user", message).then(function(reply) {
+    bot.reply("local - user", message).then(function (reply) {
         botReply(reply);
     });
+}
+
+function loadBrains(pathToRive) {
+    bot.loadFile(pathToRive).then(botReady).catch(botNotReady);
 }
 
 function botReady() {
