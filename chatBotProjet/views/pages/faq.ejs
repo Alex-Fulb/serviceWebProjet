@@ -4,7 +4,12 @@
 <head>
   <link rel="stylesheet" type="text/css" href="/css/botstyle.css" />
   <%- include('../partials/head'); %>
+    <link rel="stylesheet" type="text/css" href="/css/teststyle.css" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
@@ -28,44 +33,50 @@
     </div>
 
   </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md">
-        <div class="panel panel-primary">
-          <div class="panel-heading" id="accordion">
-            <span class="glyphicon glyphicon-comment"></span> Chat
-            <div class="btn-group pull-right">
-              <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion"
-                href="#collapseOne">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-              </a>
+  <!--START-->
+  <div class="row">
+    <div class="chatbox chatbox22 chatbox--tray" style="border: 1px solid;">
+      <!--Header-->
+      <div class="chatbox__title">
+        <h5 class="test"><a href="javascript:void()" style="user-select: none;">FAQBot</a></h5>
+        <button class="chatbox__title__option" style="color: white; text-align: center; font-size : 24px;">
+          +</button>
+      </div>
+      <!---->
+      <!--TextBox-->
+      <div class="chatbox__body">
+        <ul class="messages"></ul>
+      </div>
+      <!--TextBox End-->
+      <!--footer-->
+      <div class="panel-footer">
+        <div class="input-group">
+          <form>
+            <input type="submit" class="btn btn-warning btn-sm" style="float: right;" />
+            <div style="overflow: hidden; padding-right: .5em;">
+              <input id="inputChat" type="text" class="form-control input-sm" placeholder="Écrivez ici"
+                autocomplete="off">
             </div>
-          </div>
-          <div class="panel-collapse collapse" id="collapseOne">
-            <div class="panel-body">
-              <ul class="messages">
-              </ul>
-            </div>
-            <div class="panel-footer">
-              <div class="input-group">
-                <button class="btn btn-warning btn-sm" id="load" onclick="loadBrains('/brains/test.rive')"> Load brains </button>
-                <form>
-                  <input id="inputChat" type="text" class="form-control input-sm"
-                    placeholder="Écrivez ici et appuyer sur Entrée pour envoyer" autocomplete="off">
-                  <input type="submit" class="btn btn-warning btn-sm" style="float: right;" />
-                </form>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
+      <!---->
     </div>
   </div>
+  <!--END-->
+
   <script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
   <script src="/js/faqbotscript.js"></script>
 
 </body>
+<script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/testbot.js"></script>
+<script src="/js/faqbotscript.js"></script>
 
 <footer>
   <%- include('../partials/footer'); %>

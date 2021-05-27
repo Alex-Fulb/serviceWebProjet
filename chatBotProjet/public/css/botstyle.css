@@ -14,6 +14,10 @@
   border-left: 0;
   border-right: 0;
 }
+.messages {
+  /* to remove default value of 40px*/
+  padding-left: 0;
+}
 
 .messages div {
   max-width: 60%;
@@ -23,12 +27,14 @@
   border-radius: 7px;
 }
 
+/*paremeter of bot response*/
 .messages .bot {
   text-align: left;
   margin-right: auto;
   background: lightblue;
 }
 
+/*paremeter of user response*/
 .messages .self {
   text-align: right;
   margin-left: auto;
