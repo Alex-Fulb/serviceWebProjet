@@ -659,3 +659,11 @@
 	+ (west|w){weight=5}
 	- {topic=room1}{@look}
 < topic
+
+/* ERROR handler*/
+
++ *
+- Sorry did not get what you said, if i can not answer you please do contact the support team
+- I am afraid that i can not understand you, if i can not answer you please do contact the support team
+- I did not get it, if i can not answer you please do contact the support team
+- Sorry can you please elaborate that for me, if i can not answer you please do contact the support team

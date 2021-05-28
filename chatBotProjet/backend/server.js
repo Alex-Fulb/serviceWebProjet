@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-var cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
-require('dotenv').config();
+
+var dotenv = require('dotenv').config();
+var cookieParser = require('cookie-parser')
+var path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -13,7 +15,7 @@ app.use(express.urlencoded())
 app.use(cookieParser())
 
 //
-var path = require('path');
+
 app.use(express.static(path.join(__dirname, '../public')));
 //
 
