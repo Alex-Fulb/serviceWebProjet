@@ -1,0 +1,291 @@
+<meta charset="UTF-8">
+<title>Chatbot</title>
+
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+    // gestion d'évènement de la page index.ejs 
+
+    $(document).ready(function () {
+
+        // ================= CREATION D'UN BOT =====================
+        $("#create").on('click', function () {
+            $.ajax({
+                url: '/home/createBot',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({ nom: $("#nomBot").val() }),
+                success: function (response) {
+                    console.log(`response ! `, response)
+                    $('#table').append($('<tr id=' + response.id_Bot + '><td id=' + response.id_Bot + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response.id_Bot + '><button class=' + response.name + ' name ="demarrer" id=' + response.id_Bot + '>Démarrer</button></td> <td><button class=' + response.name + ' name="discord" id=' + response.id_Bot + '>Go discord</button></td> <td><button class=' + response.name + ' name="supp" id=' + response.id_Bot + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response.id_Bot + '>Modifier</button></td></tr>'));
+                }
+            });
+        });
+
+
+        // ================= SUPRESSION D'UN BOT =====================
+        $(document).on('click', "button[name = 'supp']", function () {
+            const idBot = $(this).attr('id')
+            $.ajax({
+                url: '/home/deleteBot',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({ idBot: idBot }),
+                success: function (response) {
+                    $('#' + response.idBot).remove();
+                }
+            });
+        });
+
+        // ================= DEMARRAGE D'UN BOT =====================
+        $(document).on('click', "button[name = 'demarrer']", function () {
+            const idBot = $(this).attr('id')
+            const nameBot = $(this).attr('class')
+
+            console.log(`idBot`, idBot)
+            console.log(`nameBot`, nameBot)
+            $.ajax({
+                url: '/home/bot',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idBot: idBot,
+                    nameBot: nameBot
+                }),
+                success: function (response) {
+                    console.log(`response du demarrer ->`)
+                }
+            });
+        });
+
+
+        // ================= DEMARRAGE D'UN BOT SUR DISCORD =====================
+        $(document).on('click', "button[name = 'discord']", function () {
+            const idBot = $(this).attr('id')
+            const nameBot = $(this).attr('class')
+
+            console.log(`idBot`, idBot);
+            console.log(`nameBot`, nameBot);
+            console.log("bien reçu chef");
+            $.ajax({
+                url: '/home//botDiscord',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idBot: idBot,
+                    nameBot: nameBot
+                }),
+                success: function (response) {
+                    console.log(`response du demarrer ->`)
+                }
+            });
+        });
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    @charset "UTF-8";
+
+    body {
+        background: rgb(94, 129, 172);
+    }
+
+    #primary_nav_wrap {
+        margin-top: 15px
+    }
+
+    #primary_nav_wrap ul {
+        list-style: none;
+        position: relative;
+        float: left;
+        margin: 0;
+        padding: 0
+    }
+
+    #primary_nav_wrap ul a {
+        display: block;
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 32px;
+        padding: 0 15px;
+        font-family: system-ui;
+    }
+
+    #primary_nav_wrap ul li {
+        position: relative;
+        float: left;
+        margin: 0;
+        padding: 0
+    }
+
+    #primary_nav_wrap ul li.current-menu-item {
+        background: #5E81AC;
+        color: white;
+        border: hidden;
+
+        border-radius: 6px;
+    }
+
+    #primary_nav_wrap ul li:hover :not(button):not(input) {
+        background: #81A1C1;
+        border: hidden;
+        border-radius: 6px;
+    }
+
+    #primary_nav_wrap ul ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        padding: 0
+    }
+
+    #primary_nav_wrap ul ul li {
+        float: none;
+        width: 150px
+    }
+
+    #primary_nav_wrap ul ul a {
+        line-height: 120%;
+        padding: 10px 15px
+    }
+
+    #primary_nav_wrap ul ul ul {
+        top: 0;
+        left: 100%
+    }
+
+    #primary_nav_wrap ul li:hover>ul {
+        display: block
+    }
+
+    #primary_nav_wrap ul li a {
+        color: white;
+    }
+
+
+
+    #barre {
+        line-height: 120%;
+        width: 300px;
+        padding: 5px 15px;
+        border-color: black;
+    }
+
+    #barre2 {
+        line-height: 120%;
+        width: 200px;
+        padding: 5px 15px;
+        border-color: black;
+    }
+
+    #musical {
+        display: block;
+        color: #5E81AC;
+        text-shadow: 6px 5px 0px #3d5676;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 100px;
+        line-height: 32px;
+        padding: 0 15px;
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif
+    }
+
+    #musicalPetit {
+
+        display: block;
+        color: #5E81AC;
+        /*text-shadow:  6px 5px 0px #3d5676;*/
+        text-decoration: none;
+        font-weight: 300;
+        font-size: 50px;
+        padding: 0 22px;
+        line-height: 15px;
+
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif
+    }
+
+    button {
+        background-color: #ECEFF4;
+        color: black;
+        border: 3px solid #88C0D0;
+        border-radius: 12px;
+        padding: 5px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: system-ui;
+        font-size: 12px;
+    }
+
+
+    button:hover {
+        background-color: #5E81AC;
+
+        color: white;
+    }
+
+
+    table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 70%;
+    }
+
+    table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #E5E9F0;
+    }
+
+    h1 h3 {
+
+        font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    h4 h5 {
+
+        font-family: "comic sans ms";
+        color: red;
+    }
+
+    .form {
+        color: #ECEFF4;
+        border: 3px solid #2E3440;
+        border-radius: 5px;
+        background: #4C566A;
+        font-family: system-ui;
+        box-shadow: .4rem .4rem 0 #3B4252;
+    }
+</style>

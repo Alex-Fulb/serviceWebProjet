@@ -1,0 +1,4 @@
+requiered dependencies
+
+npm i express cors mongoose dotenv cookie-parser bcryptjs jsonwebtoken ejs mongoose-auto-increment optimist discord discord.js
+npm i --save-dev nodemon
