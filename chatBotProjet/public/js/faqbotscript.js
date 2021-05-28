@@ -4,20 +4,19 @@ const message_container = document.querySelector('.messages');
 const form = document.querySelector('form');
 const input_box = document.getElementById("inputChat");
 
-var langdiv = document.getElementById("langdiv").value;
 var lang = "eng";
 
 window.onload = function () {
-  bot.loadFile("/brains/faqbrain_eng.rive").then(botReady).catch(botNotReady);
+  bot.loadFile("/brains/truebrain.rive").then(botReady).catch(botNotReady);
 }
 
 function loadBrains(pathToRive) {
   bot.loadFile(pathToRive).then(botReady).catch(botNotReady);
 }
 
-function changeBrain() {
-  lang = document.querySelector('input[name="lang"]:checked').value;
+function changeBrain(choice) {
   bot = new RiveScript;
+  lang = choice;
   switch (lang) {
 
     case "eng":
