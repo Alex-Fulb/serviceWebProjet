@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+var ps = require('ps-node');
 // Include process module
 const process = require('process');
 const {spawn, exec} = require('child_process');
@@ -55,8 +56,7 @@ router.get('/faq', function(req, res) {
 });
 
 
-// ==================================== POST
-// ============================================
+// ==================================== POST ============================================
 
 
 // CREATION DU BOT
@@ -112,7 +112,6 @@ router.post('/deleteBot', async function(req, res) {
 });
 
 
-
 // DEMARRER LE BOT
 router.post('/bot', async (req, res) => {
   const {idBot, nameBot} = req.body;
@@ -131,47 +130,56 @@ router.post('/bot', async (req, res) => {
         });
 
     child.stdout.on('data', (data) => {console.log(`stdout: ${data}`)})
-
     child.stderr.on('data', (data) => {console.log(`stderr: ${data}`)})
-
     child.unref();
   });
 });
 
 
-// DEMARRER LE BOT
-router.post('/botDiscord', async (req, res) => {
-  const {idBot, nameBot} = req.body;
+// DEMARRER LE BOT SUR DISCORD 
+router.post('/coBotDiscord', async (req, res) => {
+  const {nameBot} = req.body;
+  exec(
+      `cd discordConfigurationBot/ ; node index.js ${nameBot}`,
+      (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+      });
+});
 
-  console.log(`idBot`, idBot);
-  console.log(`nameBot`, nameBot);
 
-  exec(`cd discordConfigurationBot/ ; node index.js ${nameBot}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
+// DECONNECTER LE BOT DE DISCORD
+router.post('/disconnectBotDiscord', async (req, res) => {
+  const {nameBot} = req.body;
+  ps.lookup({command: 'node', psargs: 'ux'}, function(err, resultList) {
+    if (err) {
+      throw new Error(err);
     }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
+    resultList.forEach(function(process) {
+      if (process) {
+        // console.log(
+        //     'PID: %s, COMMAND: %s, ARGUMENTS: %s', process.pid, process.command,
+        //     process.arguments);
+        for (var i = 0; i < process.arguments.length; i++) {
+          if (process.arguments[i] === nameBot) {
+            console.log('ALORS ?', process.arguments[i]);
+            exec(`kill ${process.pid}`, (error, stdout, stderr) => {
+              if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+              }
+              //console.log(`stdout: ${stdout}`);
+              //console.error(`stderr: ${stderr}`);
+            });
+          }
+        }
+      }
+    });
   });
-  // const bot = await Bot.findOne({_id: idBot}, async (err, doc) => {
-  //   const portBot = doc.port;
-  // const child = spawn(
-  //     'node',
-  //     [
-  //       '../discordConfigurationBot/index.js',nameBot
-  //     ],
-
-  //     {
-  //       shell: true,
-  //       detached: true,
-  //     });
-
-  // child.stdout.on('data', (data) => {console.log(`stdout: ${data}`)})
-
-  // child.stderr.on('data', (data) => {console.log(`stderr: ${data}`)})
-
-  // child.unref();
 });
 
 

@@ -20,7 +20,7 @@
                 data: JSON.stringify({nom : $("#nomBot").val()}),
                 success: function(response){ 
                     console.log(`response ! `, response  )
-                    $('#table').append($('<tr id='+response.id_Bot+'><td id='+response.id_Bot+'name='+response.name+'>'+response.name+'</td> <td id='+response.id_Bot+'><button class='+response.name+' name ="demarrer" id='+response.id_Bot+'>Démarrer</button></td> <td><button class='+response.name+' name="discord" id='+response.id_Bot+'>Go discord</button></td> <td><button class='+response.name+' name="supp" id='+response.id_Bot+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response.id_Bot+'>Modifier</button></td></tr>'));
+                    $('#table').append($('<tr id='+response.id_Bot+'><td id='+response.id_Bot+'name='+response.name+'>'+response.name+'</td> <td id='+response.id_Bot+'><button class='+response.name+' name ="demarrer" id='+response.id_Bot+'>Démarrer</button></td> <td><button class='+response.name+' name="discord" id='+response.id_Bot+'>Discord</button></td> <td><button class='+response.name+' name="supp" id='+response.id_Bot+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response.id_Bot+'>Modifier</button></td></tr>'));
                 }
             } );
         });
@@ -61,28 +61,47 @@
             } );
         });
 
+        
+        // ================ EVENTS SUR LE BOUTON DISCORD =================== 
+        
+        $(document).on('click', "button[name = 'discord']",firstClick);
 
-         // ================= DEMARRAGE D'UN BOT SUR DISCORD =====================
-         $(document).on('click',"button[name = 'discord']",function(){
-           const idBot = $(this).attr('id')
-           const nameBot = $(this).attr('class')
-
-           console.log(`idBot`, idBot);
-           console.log(`nameBot`, nameBot);
-           console.log("bien reçu chef");
-           $.ajax({
-                url: '/home//botDiscord',
+        function secondClick() {
+            $(document).off('click').on('click', "button[name = 'discord']",firstClick);
+            $(this).html('Discord');
+            const nameBot = $(this).attr('class');
+            $.ajax({
+                url: '/home/disconnectBotDiscord',
                 type: "POST",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    idBot : idBot,
-                    nameBot : nameBot
+                        nameBot : nameBot
                 }),
                 success: function(response){ 
-                    console.log(`response du demarrer ->`)
+
                 }
-            } );
-        });
+            }) 
+        } 
+
+        function firstClick() {
+            //alert("First Clicked");
+            $(document).off('click').on('click', "button[name = 'discord']",secondClick);
+            $(this).html('Disconnect');
+            const nameBot = $(this).attr('class')
+            console.log(`nameBot`, nameBot);
+            console.log("bien reçu chef");
+            $.ajax({
+                url: '/home/coBotDiscord',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                        nameBot : nameBot
+                }),
+                success: function(response){ 
+                    
+                }
+            })   
+        }
     })  
 </script>
 
