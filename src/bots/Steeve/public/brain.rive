@@ -1,11 +1,10 @@
 ! version = 2.0
 
 + hello
-- - Hello, what is your name?
+- hello, what is your name?
 
 + hi
 - hi, what is your name?
-
 
 + my name is *
 - nice to meet you <star>
@@ -22,4 +21,3 @@
 - I am afraid that i can not understand you
 - I did not get it
 - Sorry can you please elaborate that for me
-
