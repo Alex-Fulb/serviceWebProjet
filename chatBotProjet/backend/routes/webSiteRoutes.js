@@ -111,29 +111,6 @@ router.post('/deleteBot', async function (req, res) {
   })
 });
 
-// MODIFICATION D'UN BOT
-router.post('/modifBot', async (req, res) => {
-  const { idBot, nameBot } = req.body;
-  const bot = await Bot.findOne({ _id: idBot }, async (err, doc) => {
-    const portBot = doc.port;
-    const child = spawn(
-      'cp',
-      [
-        '-R', '../templateBot', '../bots/' + nameBot, ';', 'node',
-        '../bots/' + nameBot + '/template.js', portBot
-      ],
-
-      {
-        shell: true,
-        detached: true,
-      });
-
-    child.stdout.on('data', (data) => { console.log(`stdout: ${data}`) })
-    child.stderr.on('data', (data) => { console.log(`stderr: ${data}`) })
-    child.unref();
-  });
-});
-
 
 // DEMARRER LE BOT
 router.post('/bot', async (req, res) => {
