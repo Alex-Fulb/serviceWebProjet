@@ -61,6 +61,27 @@
             } );
         });
 
+        // ================= MODIFICATION D'UN BOT =====================
+        $(document).on('click',"button[name = 'modifier']",function(){
+           const idBot = $(this).attr('id')
+           const nameBot = $(this).attr('class')
+
+           console.log(`idBot`, idBot)
+           console.log(`nameBot`, nameBot)
+           $.ajax({
+                url: '/home/modifBot',
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    idBot : idBot,
+                    nameBot : nameBot
+                }),
+                success: function(response){ 
+                    console.log(`bot modified`)
+                }
+            } );
+        });
+
         
         // ================ EVENTS SUR LE BOUTON DISCORD =================== 
         
