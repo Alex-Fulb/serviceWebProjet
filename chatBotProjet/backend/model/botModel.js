@@ -6,6 +6,8 @@ const Schema = mongoose.Schema;
 const botSchema = new Schema({
     name: { type: String, required: true },
     port: { type: String, required: true, default:3000, unique:true },
+    inListening :{ type: Boolean,default:false },
+    discord: { type: Boolean ,default:false },
     owner: { 
         type: Schema.Types.ObjectId ,
         ref: "user"
