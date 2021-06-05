@@ -25,16 +25,27 @@
           <table id="table">
             <tr>
               <th>Prenom</th>
+              <th>Port</th>
+              <th>Discord</th>
             </tr>
+
             <% if(locals.bots) { %>
             
               <%for (var i = 0; i < bots.length; i++) {%>
-                <tr id= <%=bots[i].id_Bot %>>
-                  <td id= <%=bots[i].id_Bot %> name= <%=bots[i].name%>> <%=bots[i].name%></td> 
-                  <td><button class=<%=bots[i].name%> name ="demarrer" id= <%=bots[i].id_Bot %> >Démarrer</button></td>
-                  <td><button class=<%=bots[i].name%> name ="discord" id= <%=bots[i].id_Bot %> >Discord</button></td>  
-                  <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i].id_Bot %> >Supprimer</button></td> 
-                  <td><button class=<%=bots[i].name%> name = "modifier" id= <%=bots[i].id_Bot %> >Modifier</button></td>
+                <tr id= <%=bots[i]._id %>>
+                  <td id= <%=bots[i]._id %> name= <%=bots[i].name%>> <%=bots[i].name%></td> 
+                  <%if(bots[i].inListening){%>
+                    <td><button class=<%=bots[i].name%> name ="demarrer <%=bots[i].inListening%>" id= <%=bots[i]._id %> >Numéro:<%=bots[i].port%> <b>En écoute</b></button></td>
+                  <%}else{%> 
+                    <td><button class=<%=bots[i].name%> name ="demarrer <%=bots[i].inListening%>" id= <%=bots[i]._id %> >Numéro:<%=bots[i].port%> <b>Déconnecter</b></button></td>
+                  <%}%> 
+                  <%if(bots[i].discord){%>
+                    <td><button class=<%=bots[i].name%> name ="discord <%=bots[i].discord%>" id= <%=bots[i]._id %> >En ligne</button></td> 
+                  <%}else{%>   
+                    <td><button class=<%=bots[i].name%> name ="discord <%=bots[i].discord%>" id= <%=bots[i]._id %> >Hors ligne</button></td> 
+                  <%}%> 
+                  <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i]._id %> >Supprimer</button></td> 
+                  <td><button class=<%=bots[i].name%> name = "modifier" id= <%=bots[i]._id %> >Modifier</button></td>
                 </tr>
               <%}%> 
           <%}%>
