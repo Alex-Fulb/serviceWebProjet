@@ -2,6 +2,7 @@ var RiveScript = require('rivescript');
 var argv = require('optimist').argv
 let bot = new RiveScript();
 
+//TODO brains doit récupérer la valeur dans la bdd
 const brains = ['./brain.rive'];
 
 
@@ -25,8 +26,8 @@ client.once('ready', () => {
   console.log(`argv._[0]`, argv._[0])
 });
 
-function loadBrains() {
-  bot.loadFile('./brain2.rive').then(botReady).catch(botNotReady);
+function loadBrains(filename) {
+  bot.loadFile('./' + filename + '.rive').then(botReady).catch(botNotReady);
 }
 
 
@@ -37,17 +38,22 @@ client.on('message', message => {
   //for special command
   const args = message.content.slice(prefix.length).trim().split(' ');
   const specialCommandToken = args.shift().toLowerCase();
-  const specialCommand =  args.shift();
+  const specialCommand = args.shift();
   try {
     //si commande spéciale
     if (specialCommandToken === 'sc') {
-      message.channel.send(`**Special command** called:\n**Command**: ${specialCommand}\n**Arguments**: ${args}`);
-      switch (specialCommand)
-      {
-        case 'load' :
-          loadBrains()
+      //message.channel.send(`**Special command** called:\n**Command**: ${specialCommand}\n**Arguments**: ${args}`);
+      message.channel.send(`**Special command called**`);
+      switch (specialCommand) {
+        case 'load':
+          loadBrains(args.shift)
+          message.channel.send(`**File loaded with success**: ${args.shift}`);
           break;
-        default :
+        case 'disconnect':
+          //get destroy before saying good bye -_-
+          message.reply(`**${argv._[0]}** : Good bye`).then(client.destroy());
+          break;
+        default:
           message.channel.send('Special command not recognize')
       }
 
@@ -58,9 +64,6 @@ client.on('message', message => {
       bot.reply('local - user', command).then(function (reply) {
         console.log(`reply`, reply)
         message.reply(`**${argv._[0]}** : ${reply}`);
-        if (command === 'disconnect') {
-          client.destroy();
-        }
       });
     }
   } catch (error) {

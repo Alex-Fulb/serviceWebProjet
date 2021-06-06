@@ -17,10 +17,10 @@
                 url: '/home/createBot',
                 type: "POST",
                 contentType: 'application/json',
-                data: JSON.stringify({nom : $("#nomBot").val()}),
-                success: function(response){ 
-                    console.log(`response ! `, response  )
-                    $('#table').append($('<tr id='+response._id+'><td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>Déconnecter</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>Hors ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td></tr>'));
+                data: JSON.stringify({ nom: $("#nomBot").val() }),
+                success: function (response) {
+                    console.log(`response ! `, response)
+                    $('#table').append($('<tr id=' + response._id + '><td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>Déconnecter</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>Hors ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td></tr>'));
                 }
             });
         });
@@ -40,17 +40,16 @@
             });
         });
 
-        $(document).on('click', "button[name*='discord']",test);
-        $(document).on('click', "button[name*='demarrer']",test2);
+        $(document).on('click', "button[name*='discord']", test);
+        $(document).on('click', "button[name*='demarrer']", test2);
 
         // ================= CONNEXION / DECONNEXION DISCORD =====================
         function test() {
-           
+
             const nameBot = $(this).attr('class');
             const idBot = $(this).attr('id');
 
-            if(($(this).attr('name')).split(" ")[1] === "false")
-            {
+            if (($(this).attr('name')).split(" ")[1] === "false") {
                 console.log(`nameBot`, nameBot);
                 console.log("bien reçu chef");
                 $.ajax({
@@ -58,39 +57,39 @@
                     type: "POST",
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        idBot : idBot,
-                        nameBot : nameBot
+                        idBot: idBot,
+                        nameBot: nameBot
                     }),
-                    success: function(response){ 
+                    success: function (response) {
                         console.log(`response`, response);
-                        if(response.inListening) {
-                            $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>En écoute</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>En ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
-                        }else{
-                            $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>Déconnecter</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'"" id='+response._id+'>En ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
+                        if (response.inListening) {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>En écoute</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>En ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        } else {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>Déconnecter</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '"" id=' + response._id + '>En ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
                         }
                     }
-                }) 
-            }else {
+                })
+            } else {
 
                 $.ajax({
-                url: '/home/disconnectBotDiscord',
-                type: "POST",
-                contentType: 'application/json',
-                data: JSON.stringify({
-                        idBot : idBot,
-                        nameBot : nameBot
-                }),
-                success: function(response){ 
-                    console.log(`response.discord`, response.discord);
-                    if(response.inListening) {
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>En écoute</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>Hors ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
-                    }else{
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>Déconnecter</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>Hors ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
+                    url: '/home/disconnectBotDiscord',
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        idBot: idBot,
+                        nameBot: nameBot
+                    }),
+                    success: function (response) {
+                        console.log(`response.discord`, response.discord);
+                        if (response.inListening) {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>En écoute</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>Hors ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        } else {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>Déconnecter</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>Hors ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        }
                     }
-                }
-            }) 
+                })
             }
-   
+
         }
 
 
@@ -100,52 +99,52 @@
             const idBot = $(this).attr('id');
             const portBot = ((($(this).text()).split(":"))[1].split(" "))[0];
 
-            if(($(this).attr('name')).split(" ")[1] === "false")
-            {
+            if (($(this).attr('name')).split(" ")[1] === "false") {
                 $.ajax({
-                url: '/home/bot',
-                type: "POST",
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    idBot : idBot,
-                    nameBot : nameBot
-                }),
-                success: function(response){ 
-                    console.log(`response du demarrer ->`);
-                    console.log(`response.idBot`,response);
-                    if(response.discord) {
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>En écoute</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>En ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
-                    }else{
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>En écoute</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>Hors ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
+                    url: '/home/bot',
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        idBot: idBot,
+                        nameBot: nameBot
+                    }),
+                    success: function (response) {
+                        console.log(`response du demarrer ->`);
+                        console.log(`response.idBot`, response);
+                        if (response.discord) {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>En écoute</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>En ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        } else {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>En écoute</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>Hors ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        }
                     }
-                }});
+                });
 
-            }else{
+            } else {
                 $.ajax({
-                url: '/home/disconnectBotPort',
-                type: "POST",
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    idBot : idBot,
-                    nameBot : nameBot,
-                    portBot : portBot,
-                }),
-                success: function(response){ 
-                    console.log(`response du demarrer ->`);
-                    console.log(`response.idBot`,response);
-                    if(response.discord) {
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>Déconnecter</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>En ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
-                    }else{
-                        $('#'+response._id).html('<td id='+response._id+'name='+response.name+'>'+response.name+'</td> <td id='+response._id+'><button class='+response.name+' name ="demarrer '+response.inListening+'" id='+response._id+'>Numéro:'+response.port+' <b>Déconnecter</b></button></td> <td><button class='+response.name+' name="discord '+response.discord+'" id='+response._id+'>Hors ligne</button></td> <td><button class='+response.name+' name="supp" id='+response._id+'>Supprimer</button></td> <td><button class='+response.name+' name="modifier" id='+response._id+'>Modifier</button></td>');
+                    url: '/home/disconnectBotPort',
+                    type: "POST",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        idBot: idBot,
+                        nameBot: nameBot,
+                        portBot: portBot,
+                    }),
+                    success: function (response) {
+                        console.log(`response du demarrer ->`);
+                        console.log(`response.idBot`, response);
+                        if (response.discord) {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>Déconnecter</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>En ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        } else {
+                            $('#' + response._id).html('<td id=' + response._id + 'name=' + response.name + '>' + response.name + '</td> <td id=' + response._id + '><button class=' + response.name + ' name ="demarrer ' + response.inListening + '" id=' + response._id + '>Numéro:' + response.port + ' <b>Déconnecter</b></button></td> <td><button class=' + response.name + ' name="discord ' + response.discord + '" id=' + response._id + '>Hors ligne</button></td> <td><button class=' + response.name + ' name="supp" id=' + response._id + '>Supprimer</button></td> <td><button class=' + response.name + ' name="modifier" id=' + response._id + 'onclick="popup(id)"' + '>Modifier</button></td>');
+                        }
                     }
-                }
                 });
             }
         }
 
 
-        
-    })  
+
+    })
 </script>
 
 

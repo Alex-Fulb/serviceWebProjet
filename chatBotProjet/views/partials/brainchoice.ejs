@@ -1,0 +1,41 @@
+<!--
+    TODO (facultatif)
+    brains doit récupérer la liste des brains disponibles
+-->
+<%const brains=['Normal', 'Dungeon' , 'Crazy' ];%>
+    <div style="display: inline-block ; margin-right: 50px">
+        <div id="tablebrain" style="display: none;">
+            <h3 style="font: size 10;" id="namebot"></h3>
+            <table style="margin-left:15px">
+                <thead>
+                    <tr>
+                        <th scope="col">Fichier</th>
+                        <th scope="col">Chargé?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%brains.forEach(element=> {console.log(element); %>
+                        <tr>
+                            <td>
+                                <%=element%>
+                            </td>
+                            <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id=<%="checkbox" +element%> >
+                                    <label class="custom-control-label" for=<%="checkbox" +element%>></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <%})%>
+                            <td>
+
+                                <button onclick="checkedbox()">
+                                    Sauvegarder
+                                </button>
+                            </td>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <script src="/js/brainchoice.js"></script>

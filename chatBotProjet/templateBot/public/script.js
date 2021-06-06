@@ -1,5 +1,6 @@
 let bot = new RiveScript();
 
+//TODO brains doit récupérer la valeur dans la bdd
 const brains =
     [
         './brain.rive'
