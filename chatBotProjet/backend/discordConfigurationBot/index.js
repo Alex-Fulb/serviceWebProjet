@@ -46,8 +46,8 @@ client.on('message', message => {
       message.channel.send(`**Special command called**`);
       switch (specialCommand) {
         case 'load':
-          loadBrains(args.shift)
-          message.channel.send(`**File loaded with success**: ${args.shift}`);
+          loadBrains(args)
+          message.channel.send(`**File loaded with success**: ${args}`);
           break;
         case 'disconnect':
           //get destroy before saying good bye -_-
