@@ -22,7 +22,7 @@ var lang = "eng";
 //====================================================
 
 window.onload = function () {
-  bot.loadFile("/brains/truebrain.rive").then(botReady).catch(botNotReady);
+  bot.loadFile("/brains/faqbrain_eng.rive").then(botReady).catch(botNotReady);
 }
 
 form.addEventListener('submit', (e) => {
