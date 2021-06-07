@@ -10,53 +10,58 @@
     <%- include('../partials/header'); %>
   </header>
   <main>
+    <div class="jumbotron">
 
-    <body>
-      <br>
-      <h3>Créer un bot</h3>
-      <input type="text" id="nomBot" placeholder="Steeve.."><button id="create">Créer</button>
-      <br>
-      <br>
-      <div>
-        <div style="display: inline-block">
-          <h3 style="font: size 10;">Mes bots</h3>
-          <table id="table">
-            <tr>
-              <th>Prenom</th>
-              <th>Port</th>
-              <th>Discord</th>
-            </tr>
-            <% if(locals.bots) { %>
-              <%for (var i=0; i < bots.length; i++) {%>
-                <tr id=<%=bots[i]._id %>>
-                  <td id=<%=bots[i]._id %> name= <%=bots[i].name%>> <%=bots[i].name%>
-                  </td>
-                  <%if(bots[i].inListening){%>
-                    <td><button class=<%=bots[i].name%> name ="demarrer <%=bots[i].inListening%>" id= <%=bots[i]._id %>
-                            >Numéro:<%=bots[i].port%> <b>En écoute</b></button></td>
-                    <%}else{%>
+      <body>
+        <br>
+        <h3>Créer un bot</h3>
+        <input type="text" id="nomBot" placeholder="Steeve.."><button id="create">Créer</button>
+        <br>
+        <br>
+        <div style="background: slategrey;border: 3px solid; border-radius: 5px;">
+          <div style="display: inline-block">
+            <h3 style="font: size 10;">Mes bots</h3>
+            <table id="table" style="margin-bottom: 3px; border: 3px solid black; background-color: black;">
+              <tr>
+                <th>Prenom</th>
+                <th>Port</th>
+                <th>Discord</th>
+              </tr>
+              <% if(locals.bots) { %>
+                <%for (var i=0; i < bots.length; i++) {%>
+                  <tr id=<%=bots[i]._id %>>
+                    <td id=<%=bots[i]._id %> name= <%=bots[i].name%>> <%=bots[i].name%>
+                    </td>
+                    <%if(bots[i].inListening){%>
                       <td><button class=<%=bots[i].name%> name ="demarrer <%=bots[i].inListening%>" id= <%=bots[i]._id
-                              %> >Numéro:<%=bots[i].port%> <b>Déconnecter</b></button></td>
-                      <%}%>
-                        <%if(bots[i].discord){%>
-                          <td><button class=<%=bots[i].name%> name ="discord <%=bots[i].discord%>" id= <%=bots[i]._id %>
-                                  >En ligne</button></td>
-                          <%}else{%>
+                              %>
+                              >Numéro:<%=bots[i].port%> <b>En écoute</b></button></td>
+                      <%}else{%>
+                        <td><button class=<%=bots[i].name%> name ="demarrer <%=bots[i].inListening%>" id= <%=bots[i]._id
+                                %> >Numéro:<%=bots[i].port%> <b>Déconnecter</b></button></td>
+                        <%}%>
+                          <%if(bots[i].discord){%>
                             <td><button class=<%=bots[i].name%> name ="discord <%=bots[i].discord%>" id= <%=bots[i]._id
-                                    %> >Hors ligne</button></td>
-                            <%}%>
-                              <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i]._id %> >Supprimer</button>
-                              </td>
-                              <td><button class=<%=bots[i].name%> name="modifier" id=<%=bots[i]._id%>
-                                    onclick="popup(id)"> Modifier</button></td>
-                </tr>
-                <%}%>
+                                    %>
+                                    >En ligne</button></td>
+                            <%}else{%>
+                              <td><button class=<%=bots[i].name%> name ="discord <%=bots[i].discord%>" id=
+                                    <%=bots[i]._id %> >Hors ligne</button></td>
+                              <%}%>
+                                <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i]._id %>
+                                      >Supprimer</button>
+                                </td>
+                                <td><button class=<%=bots[i].name%> name="modifier" id=<%=bots[i]._id%>
+                                      onclick="popup(id)"> Modifier</button></td>
+                  </tr>
                   <%}%>
-          </table>
+                    <%}%>
+            </table>
+          </div>
+          <%- include('../partials/brainchoice'); %>
         </div>
-        <%- include('../partials/brainchoice'); %>
-      </div>
-    </body>
+      </body>
+    </div>
   </main>
   <footer>
     <%- include('../partials/footer'); %>

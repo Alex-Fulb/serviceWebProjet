@@ -11,7 +11,7 @@
 function popup(id) {
     var popwindow = document.getElementById("tablebrain");
     if (popwindow.style.display === "none") {
-        document.getElementById("namebot").innerHTML = "Cerveaux" + id;
+        document.getElementById("namebot").innerHTML = "Cerveaux du bot: " + id;
         popwindow.style.display = "block";
         document.getElementById("tablebrain").scrollIntoView({
             behavior: "smooth",
