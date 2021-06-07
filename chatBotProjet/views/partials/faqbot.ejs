@@ -21,11 +21,11 @@
         <!---->
         <div class="dropdown dropdown--scrollable">
           <button onclick="clickDropdown()" class="dropbtn">+</button>
-          <div id="myDropdown" class="dropdown-content" style="right: 0;">
-            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+          <div id="myDropdown" class="dropdown-content" style="right: 0; max-width: 298px;">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="max-width: 296px;">
             <a onclick="changeBrain('eng');clickDropdown()">English</a>
-            <a onclick="changeBrain('fr');clickDropdown()">Français</a>
             <a onclick="changeBrain('spa');clickDropdown()">Español</a>
+            <a onclick="changeBrain('fr');clickDropdown()">Français</a>
           </div>
         </div>
         <!---->
