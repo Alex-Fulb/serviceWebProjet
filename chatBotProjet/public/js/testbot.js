@@ -1,14 +1,20 @@
-(function($) {
-    $(document).ready(function() {
-        var $chatbox = $('.chatbox'),
-            $chatboxTitle = $('.test');
+//====================================================
+// Imported In
+//====================================================
 
-        $chatboxTitle.on('click', function() {
-            $chatbox.toggleClass('chatbox--tray');
-        });
-        $chatbox.on('transitionend', function() {
-            if ($chatbox.hasClass('chatbox--closed')) $chatbox.remove();
-        });
-        
-    });
-})(jQuery);
+// faqbot.ejs
+
+//====================================================
+// Functions
+//====================================================
+
+function showBotDialogue() {
+
+    var $chatbox = $('.chatbox');
+    $chatbox.toggleClass('chatbox--tray');
+
+}
+
+//====================================================
+// End
+//====================================================

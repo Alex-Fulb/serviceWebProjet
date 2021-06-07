@@ -6,8 +6,7 @@
 </head>
 
 <body class="container">
-
-    <main>     
+    <main>
         <div class="jumbotron">
             <h1>S'inscrire</h1>
             <form action="register" method="POST">
@@ -22,16 +21,19 @@
                 <a href="/">j'ai un compte</a>
                 <br>
                 <% if (locals.error) { %>
-                <p style ="color :red"><%=error%></p>
-                <%}%>
+                    <p style="color :red">
+                        <%=error%>
+                    </p>
+                    <%}%>
             </form>
         </div>
-        <h1><%= //message%></h1>
+        <h1>
+            <%= //message%>
+        </h1>
     </main>
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
-
 </body>
 
 </html>

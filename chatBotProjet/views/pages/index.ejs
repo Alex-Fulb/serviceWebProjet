@@ -6,11 +6,9 @@
 </head>
 
 <body class="container">
-
   <header>
     <%- include('../partials/header'); %>
   </header>
-
   <main>
 
     <body>
@@ -19,21 +17,16 @@
       <input type="text" id="nomBot" placeholder="Steeve.."><button id="create">Créer</button>
       <br>
       <br>
-
       <div>
-
         <div style="display: inline-block">
           <h3 style="font: size 10;">Mes bots</h3>
-
           <table id="table">
             <tr>
               <th>Prenom</th>
               <th>Port</th>
               <th>Discord</th>
             </tr>
-
             <% if(locals.bots) { %>
-
               <%for (var i=0; i < bots.length; i++) {%>
                 <tr id=<%=bots[i]._id %>>
                   <td id=<%=bots[i]._id %> name= <%=bots[i].name%>> <%=bots[i].name%>
@@ -54,7 +47,8 @@
                             <%}%>
                               <td><button class=<%=bots[i].name%> name="supp" id= <%=bots[i]._id %> >Supprimer</button>
                               </td>
-                              <td><button class=<%=bots[i].name%> name="modifier" id=<%=bots[i]._id%> onclick="popup(id)"> Modifier</button></td>
+                              <td><button class=<%=bots[i].name%> name="modifier" id=<%=bots[i]._id%>
+                                    onclick="popup(id)"> Modifier</button></td>
                 </tr>
                 <%}%>
                   <%}%>
@@ -62,15 +56,12 @@
         </div>
         <%- include('../partials/brainchoice'); %>
       </div>
-
-
     </body>
   </main>
-
   <footer>
     <%- include('../partials/footer'); %>
   </footer>
-
+  <%- include('../partials/faqbot'); %>
 </body>
 
 </html>

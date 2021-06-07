@@ -1,3 +1,7 @@
+/*
+    used in faqbot.ejs
+*/
+
 .dropbtn {
   background-color: transparent;
   color: white;
@@ -22,7 +26,9 @@
   border-bottom: 1px solid #ddd;
 }
 
-#myInput:focus {outline: 3px solid #ddd;}
+#myInput:focus {
+  outline: 3px solid #ddd;
+}
 
 .dropdown {
   position: relative;
@@ -46,6 +52,10 @@
   display: block;
 }
 
-.dropdown a:hover {background-color: #ddd;}
+.dropdown a:hover {
+  background-color: #ddd;
+}
 
-.show {display: block;}
+.show {
+  display: block;
+}

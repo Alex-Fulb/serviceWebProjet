@@ -4,9 +4,8 @@
 <head>
   <link rel="stylesheet" type="text/css" href="/css/message.css" />
   <link rel="stylesheet" type="text/css" href="/css/dropdown.css" />
-    <link rel="stylesheet" type="text/css" href="/css/chatbox.css" />
-    <link rel="stylesheet" type="text/css" href="/css/test.css" />
-
+  <link rel="stylesheet" type="text/css" href="/css/chatbox.css" />
+  <link rel="stylesheet" type="text/css" href="/css/test.css" />
 </head>
 
 <body style="margin: 0 auto; text-align: center">
@@ -14,21 +13,22 @@
   </div>
   <!--START-->
   <div class="row">
-    <div class="chatbox chatbox22 chatbox--tray" style="border: 1px solid;">
+    <div id="chatbox" class="chatbox chatbox22 chatbox--tray" style="border: 1px solid;">
       <!--Header-->
       <div class="chatbox__title">
-        <h5 class="test"><a href="javascript:void()" style="user-select: none;">FAQBot</a></h5>
+        <h5 class="test" onclick="showBotDialogue()" id="chatboxtitle"><a href="javascript:void()"
+            style="user-select: none;">FAQBot</a></h5>
         <!---->
-          <div class="dropdown dropdown--scrollable">
-            <button onclick="clickDropdown()" class="dropbtn">+</button>
-            <div id="myDropdown" class="dropdown-content" style="right: 0;">
-              <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-              <a onclick="changeBrain('eng');clickDropdown()">English</a>
-              <a onclick="changeBrain('fr');clickDropdown()">Français</a>
-              <a onclick="changeBrain('spa');clickDropdown()">Español</a>
-            </div>
+        <div class="dropdown dropdown--scrollable">
+          <button onclick="clickDropdown()" class="dropbtn">+</button>
+          <div id="myDropdown" class="dropdown-content" style="right: 0;">
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+            <a onclick="changeBrain('eng');clickDropdown()">English</a>
+            <a onclick="changeBrain('fr');clickDropdown()">Français</a>
+            <a onclick="changeBrain('spa');clickDropdown()">Español</a>
           </div>
-          <!---->
+        </div>
+        <!---->
       </div>
       <!---->
       <!--TextBox-->
@@ -53,12 +53,10 @@
   </div>
   <!--END-->
 </body>
-
 <!--Get Rivescript-->
 <script src="https://unpkg.com/rivescript@latest/dist/rivescript.min.js"></script>
 <!--Get JQuery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!--Load own scripts-->
 <script src="/js/testbot.js"></script>
 <script src="/js/faqbotscript.js"></script>

@@ -1,5 +1,14 @@
+//====================================================
+// Imported In
+//====================================================
+
+// brainchoice.ejs
+
+//====================================================
+// Functions
+//====================================================
+
 function popup(id) {
-    console.log(id + ' is under modifications');
     var popwindow = document.getElementById("tablebrain");
     if (popwindow.style.display === "none") {
         document.getElementById("namebot").innerHTML = "Cerveaux" + id;
@@ -32,3 +41,7 @@ function checkedbox() {
     //newbrains est un array de string conteneant les nouveaux cerveaux
     console.log(newbrains);
 }
+
+//====================================================
+// End
+//====================================================

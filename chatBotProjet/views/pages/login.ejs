@@ -6,8 +6,7 @@
 </head>
 
 <body class="container">
-
-    <main>     
+    <main>
         <div class="jumbotron">
             <h1>Se connecter</h1>
             <form action="login" method="POST">
@@ -20,17 +19,19 @@
                 <br>
                 <br>
                 <% if (locals.error) { %>
-                <p style ="color :red"><%=error%></p>
-                <%}%>
-
+                    <p style="color :red">
+                        <%=error%>
+                    </p>
+                    <%}%>
             </form>
         </div>
-        <h1><%= //message%></h1>
+        <h1>
+            <%= //message%>
+        </h1>
     </main>
     <footer>
         <%- include('../partials/footer'); %>
     </footer>
-
 </body>
 
 </html>
