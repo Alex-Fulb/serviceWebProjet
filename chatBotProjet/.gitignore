@@ -1,4 +1,3 @@
-node_modules
 bots/*
 # exception to the rule to keep bots folder
 !bots/.gitkeep 
