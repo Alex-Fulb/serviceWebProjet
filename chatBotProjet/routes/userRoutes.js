@@ -7,11 +7,11 @@ require('dotenv').config();
 // ==================================== GET ============================================
 
 router.get('/', function(req, res) {
-  res.render('../../views/pages/login.ejs');
+  res.render('../views/pages/login.ejs');
 });
 
 router.get('/register', function(req, res) {
-  res.render('../../views/pages/signup.ejs');
+  res.render('../views/pages/signup.ejs');
 });
 
 // ==================================== POST ============================================
@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
   try {
     const rep = await User.findOne({email});
     if (rep) {
-      res.render('../../views/pages/signup.ejs', {error: 'email déjà utilisé'})
+      res.render('../views/pages/signup.ejs', {error: 'email déjà utilisé'})
     }
     else {
       const newUser = new User(userData)
@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
     const newUser = await User.findOne({email});
     if (!newUser) {
       res.render(
-          '../../views/pages/login.ejs', {error: 'Combinaison incorrecte'})
+          '../views/pages/login.ejs', {error: 'Combinaison incorrecte'})
       return;
     }
     const rep = await newUser.validatePassword(password)
@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
     }
     else {
       res.render(
-          '../../views/pages/login.ejs', {error: 'Combinaison incorrecte'})
+          '../views/pages/login.ejs', {error: 'Combinaison incorrecte'})
     }
   } catch (error) {
     console.error(error)

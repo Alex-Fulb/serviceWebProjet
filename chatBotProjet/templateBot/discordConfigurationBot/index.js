@@ -3,7 +3,7 @@ var argv = require('optimist').argv
 let bot = new RiveScript();
 
 //TODO brains doit récupérer la valeur dans la bdd
-const brains = ['./brain.rive'];
+const brains = ['./brains/brain.rive'];
 
 
 
@@ -27,7 +27,7 @@ client.once('ready', () => {
 });
 
 function loadBrains(filename) {
-  bot.loadFile('./' + filename + '.rive').then(botReady).catch(botNotReady);
+  bot.loadFile('./brains/' + filename + '.rive').then(botReady).catch(botNotReady);
 }
 
 

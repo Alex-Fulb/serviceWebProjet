@@ -1,4 +1,2 @@
-requiered dependencies
-
 npm i express ejs mongoose jsonwebtoken mongoose-auto-increment
 npm i --save-dev dotenv nodemon

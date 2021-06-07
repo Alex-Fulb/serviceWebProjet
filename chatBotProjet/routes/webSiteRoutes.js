@@ -33,7 +33,7 @@ router.get('/', async function (req, res) {
       listsBots[i] = bot
     }
     console.log(`listBots`, listsBots);
-    res.render('../../views/pages/index.ejs', { bots: listsBots });
+    res.render('../views/pages/index.ejs', { bots: listsBots });
   }
 });
 
@@ -41,7 +41,7 @@ router.get('/', async function (req, res) {
 router.get('/about', function (req, res) {
   if (req.cookies['dataUser'] === undefined)
     res.redirect('/')
-  else res.render('../../views/pages/about.ejs');
+  else res.render('../views/pages/about.ejs');
 });
 
 // Deconnexion
@@ -58,7 +58,7 @@ router.get('/disconnect', function (req, res) {
 router.get('/faq', function (req, res) {
   if (req.cookies['dataUser'] === undefined)
     res.redirect('/')
-  else res.render('../../views/pages/faq.ejs');
+  else res.render('../views/pages/faq.ejs');
 });
 
 
@@ -136,8 +136,8 @@ router.post('/bot', async (req, res) => {
     const child = spawn(
       'cp',
       [
-        '-R', '../templateBot', '../bots/' + nameBot, ';', 'node',
-        '../bots/' + nameBot + '/template.js', portBot
+        '-R', './templateBot/defaultBot', './bots/' + nameBot, ';', 'node',
+        './bots/' + nameBot + '/template.js', portBot
       ],
 
       {
@@ -211,7 +211,7 @@ router.post('/coBotDiscord', async (req, res) => {
   // Update statut de connexion :
   Bot.updateOne({ _id: idBot }, { '$set': { 'discord': true } }, async () => {
     exec(
-      `cd discordConfigurationBot/ ; node index.js ${nameBot}`,
+      `cd templateBot/discordConfigurationBot/ ; node index.js ${nameBot}`,
       (error, stdout, stderr) => {
         if (error) {
           console.error(`exec error: ${error}`);
