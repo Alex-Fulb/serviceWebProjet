@@ -136,8 +136,8 @@ router.post('/bot', async (req, res) => {
     const child = spawn(
       'cp',
       [
-        '-R', './templateBot/defaultBot', './bots/' + nameBot, ';', 'node',
-        './bots/' + nameBot + '/template.js', portBot
+        '-R', './templateBot/defaultBot', '../bots/' + nameBot, ';', 'node',
+        '../bots/' + nameBot + '/template.js', portBot
       ],
 
       {
